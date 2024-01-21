@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+:root {
+  --btn-font-size: 1rem;
+  --btn-text-color: hsla(96.67deg, 81.15%, 47.84%, 1);
+  --btn-outline-color: hsla(96.67deg, 81.15%, 47.84%, 0.4);
+  --btn-front-bgc: hsla(96deg, 37.04%, 10.59%, 0.3);
+  --btn-front-bgc--hover: hsla(96deg, 37.04%, 10.59%, 0.75);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Orbitron, sans-serif;
+  padding: 1rem;
+  background-color: #111;
+}
+
+button {
+  display: inline;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  color: currentColor;
+  user-select: none;
+  -webkit-appearance: none;
+}
+
+.btn {
+  position: relative;
+  padding: 1rem 3rem;
+  color: var(--btn-text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  text-align: center;
+}
+.btn::before, .btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: 1px dashed var(--btn-outline-color);
+  width: 100%;
+  height: 100%;
+  transition: 250ms all ease;
+}
+.btn::before {
+  transform: translate(-1rem, -1rem);
+}
+.btn::after {
+  background-color: var(--btn-front-bgc);
+  outline-style: solid;
+}
+.btn__inner::before, .btn__inner::after {
+  content: "";
+  border: 1px dashed var(--btn-outline-color);
+  border-left: 0;
+  border-right: 0;
+  width: 1rem;
+  height: calc(100% + 2px);
+  position: absolute;
+  top: -0.5rem;
+  transform: translateX(var(--translateX, 0)) skewY(var(--skewY, 45deg));
+  transition: 250ms all;
+}
+.btn__inner::before {
+  left: -1rem;
+}
+.btn__inner::after {
+  left: calc(100% - 1rem);
+}
+.btn__text {
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+  transition: 250ms all ease;
+  font-size: var(--btn-font-size);
+}
+
+.btn:hover::before {
+  transform: translate(1rem, -1rem);
+}
+.btn:hover::after {
+  background-color: var(--btn-front-bgc--hover);
+}
+.btn:hover .btn__inner::before,
+.btn:hover .btn__inner::after {
+  --translateX: 1rem;
+  --skewY: -45deg;
+}
+
+.btn:active::after {
+  transform: translate(0.5rem, -0.5rem);
+}
+.btn:active .btn__inner::before,
+.btn:active .btn__inner::after {
+  width: 0.5rem;
+  transform: translate(1.5rem, calc(-0.25rem - 2px)) skewy(-45deg);
+}
+.btn:active .btn__text {
+  transform: translate(0.5rem, -0.5rem);
+}
